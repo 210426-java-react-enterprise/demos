@@ -69,4 +69,20 @@ public class AppUser {
     public void setAge(int age) {
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+    public String toFileString() {
+        return String.format("%s;%s;%s;%s;%s;%d", username, email, password, firstName, lastName, age);
+    }
 }
