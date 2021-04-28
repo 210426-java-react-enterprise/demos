@@ -17,7 +17,7 @@ public class UserDAO {
 	}
 
 	public AppUser findUserByUsername(String username) {
-		// will finish another time
+		// will finish another time.
 		return null;
 	}
 }
