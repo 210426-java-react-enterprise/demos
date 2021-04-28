@@ -24,3 +24,9 @@ hs_err_pid*
 
 # Build folders
 target/
+
+# This is a Intellj specific file that should not be uploaded.
+.idea/
+
+#This is another specific IntellJ file that should not be uploaded.
+*.iml
