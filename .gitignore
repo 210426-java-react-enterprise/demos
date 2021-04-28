@@ -24,3 +24,8 @@ hs_err_pid*
 
 # Build folders
 target/
+
+
+#ide specific files
+.idea/
+*.iml
