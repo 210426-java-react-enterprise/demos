@@ -7,15 +7,15 @@ public class AppUser {
     private String email;
     private String firstName;
     private String lastName;
-    private int id;
+    private int age;
 
-    public AppUser(String username, String password, String email, String firstName, String lastName, int id) {
+    public AppUser(String username, String password, String email, String firstName, String lastName, int age) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = id;
+        this.age = age;
     }
 
     public String getUsername() {
@@ -58,11 +58,27 @@ public class AppUser {
         this.lastName = lastName;
     }
 
-    public int getId() {
-        return id;
+    public int getAge() {
+        return age;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String toFileString() {
+        return String.format("%s;%s;%s;%s;%s;%d", username, password, email, firstName, lastName, age);
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
