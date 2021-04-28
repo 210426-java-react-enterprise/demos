@@ -9,7 +9,7 @@ public class Driver {
                 "martin.tuck@revature.net", "Martin", "Tuck", 12);
 
 
-        System.out.println("hello world");
+        System.out.printf("Hello and welcome %s", newUser.getUsername());
 
     }
 }
