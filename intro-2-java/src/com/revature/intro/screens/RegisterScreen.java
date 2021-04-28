@@ -1,6 +1,7 @@
 package com.revature.intro.screens;
 
 
+import com.revature.intro.daos.UserDAO;
 import com.revature.intro.models.AppUser;
 
 import java.io.BufferedReader;
@@ -14,7 +15,8 @@ import java.io.InputStreamReader;
  * Description: {Insert Description}
  */
 public class RegisterScreen {
-    BufferedReader consoleReader;
+    private UserDAO  userDao = new UserDAO(); //GROSS! Change later...
+    private BufferedReader consoleReader;
 
     public RegisterScreen(BufferedReader consoleReader){
         this.consoleReader = consoleReader;
@@ -52,6 +54,8 @@ public class RegisterScreen {
             password = consoleReader.readLine();
 
             AppUser appUser = new AppUser(age, fName, lName, uName, password, email);
+
+            userDao.saveUserToFile(appUser);
 
             System.out.print(appUser.toString());
 

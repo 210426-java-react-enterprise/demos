@@ -80,4 +80,20 @@ public class AppUser {
     public void setuEmail(String uEmail) {
         this.uEmail = uEmail;
     }
+
+    public String toFileString() {
+        return String.format("%s;%s;%d;%s;%s;%s;", fName, lName, uAge, uEmail, uName, uPass);
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "uAge=" + uAge +
+                ", fName='" + fName + '\'' +
+                ", lName='" + lName + '\'' +
+                ", uName='" + uName + '\'' +
+                ", uPass='" + uPass + '\'' +
+                ", uEmail='" + uEmail + '\'' +
+                '}';
+    }
 }
