@@ -80,4 +80,33 @@ public class AppUser {
         this.age = age;
     }
 
+    public String toFileString() {
+        return String.format("%s;%s;%s;%s;%s;%d", username, password, email, firstName, lastName, age);
+    }
+
+//    @Override
+//    public String toString() {
+//        return "AppUser{" +
+//                "username='" + username + '\'' +
+//                ", password='" + password + '\'' +
+//                ", email='" + email + '\'' +
+//                ", firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", age=" + age +
+//                '}';
+//    }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("AppUser{");
+        sb.append("username='").append(username).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", age=").append(age);
+        sb.append('}');
+        return sb.toString();
+    }
 }
