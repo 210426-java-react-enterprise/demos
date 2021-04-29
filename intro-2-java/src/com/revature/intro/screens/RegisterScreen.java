@@ -23,8 +23,8 @@ public class RegisterScreen {
     }
 
     public void render() {
-        String fName;
-        String lName;
+        String fName = "";
+        String lName = "";
         String uName;
         String email;
         String password;
@@ -61,12 +61,61 @@ public class RegisterScreen {
 
         } catch (NumberFormatException nfe) {
             // Specific
-            System.err.println("Please provide a proper age...");
-            this.render();
+            this.fixInt(fName, lName);
         } catch (Exception e) {
             // General
             e.printStackTrace();
             System.out.println("GENERAL EXCEPTION"); // Should be logged in a prod environment not console
+        }
+    }
+
+    public void render(String firstName, String lastName, int properAge) {
+        String fName = firstName;
+        String lName = lastName;
+        String uName;
+        String email;
+        String password;
+
+        int age = properAge;
+
+        try {
+            System.out.print("Email: ");
+            email = consoleReader.readLine();
+
+            System.out.print("Username: ");
+            uName = consoleReader.readLine();
+
+            System.out.print("Password: ");
+            password = consoleReader.readLine();
+
+            AppUser appUser = new AppUser(age, fName, lName, uName, password, email);
+
+            userDao.saveUserToFile(appUser);
+
+            System.out.print(appUser.toString());
+
+        } catch (NumberFormatException nfe) {
+            // Specific
+            this.fixInt(fName, lName);
+        } catch (Exception e) {
+            // General
+            e.printStackTrace();
+            System.out.println("GENERAL EXCEPTION"); // Should be logged in a prod environment not console
+        }
+    }
+
+    public void fixInt(String firstName, String lastName) {
+        int age;
+
+        try {
+            System.err.println("Please provide a proper age...");
+            Thread.sleep(100);
+            System.out.print("Age: ");
+            age = Integer.parseInt(consoleReader.readLine());
+
+            render(firstName, lastName, age);
+        } catch (Exception e) {
+            fixInt(firstName, lastName);
         }
     }
 }
