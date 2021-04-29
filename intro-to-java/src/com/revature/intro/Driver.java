@@ -1,7 +1,8 @@
-package com.revature.intro;
+package com.revature.intro.Driver;
 
 import com.revature.intro.models.AppUser;
 import com.revature.intro.screens.RegisterScreen;
+import screens.LoginScreen;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -27,6 +28,12 @@ public class Driver {
             e.printStackTrace();
         }
 
+        try (BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in))) {
+            LoginScreen registerScreen = new LoginScreen(consoleReader);
+            registerScreen.render();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // what we used to have to do prior to Java 7's try-with-resources
 //        finally {
 //            // this block will execute regardless of whether or not the try block code throws an
