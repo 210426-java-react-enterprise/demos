@@ -25,6 +25,10 @@ hs_err_pid*
 # Build folders
 target/
 
+<<<<<<< HEAD
 #IDE- Specific files and folders
+=======
+# IDE-specific files and folders
+>>>>>>> main
 .idea/
 *.iml
