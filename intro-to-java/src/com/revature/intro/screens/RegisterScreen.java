@@ -73,4 +73,8 @@ public class RegisterScreen {
             //don't use outside of a production environment (use alternative)
         }
     }
+
+    public void verifyInt(){
+
+    }
 }
