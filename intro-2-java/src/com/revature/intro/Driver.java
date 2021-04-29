@@ -1,11 +1,5 @@
 package com.revature.intro;
 
-import com.revature.intro.models.AppUser;
-import com.revature.intro.screens.RegisterScreen;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Jbialon
@@ -15,21 +9,31 @@ import java.io.InputStreamReader;
  */
 public class Driver {
 
+    // Static makes this variable class based not instanced based.
+    static int[] ourArray;
+
     public static void main(String[] args) {
-        /*
-        AppUser newUser = new AppUser(27, "James", "Bialon",
-                                "James.Bialon", "FakePassword",
-                                "James.Bialon@revature.net");
 
-        System.out.printf("Username: %s\n", newUser.getuName());
-        */
+        int[] intArray1 = new int[10];
+        ourArray = createArrayOfSize(10);
 
-        try (BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in))) {
-            RegisterScreen console = new RegisterScreen(consoleReader);
-            console.render();
-        } catch (Exception e) {
-            e.printStackTrace();
+        System.out.println(ourArray.length);
+
+        for (int i : intArray1) {
+            System.out.println(i);
         }
+
+        int[] intArray2 = { 1, 3, 4, 9, 12, 18 };
+        System.out.println(intArray2[3]);
+
     }
 
+    // Non-static = instance level scope
+    public int[] createArrayOfSize_instance(int size){
+        return new int[size];
+    }
+
+    public static int[] createArrayOfSize(int size){
+        return new int[size];
+    }
 }
