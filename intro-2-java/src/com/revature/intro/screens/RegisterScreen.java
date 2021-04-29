@@ -93,10 +93,7 @@ public class RegisterScreen {
             userDao.saveUserToFile(appUser);
 
             System.out.print(appUser.toString());
-
-        } catch (NumberFormatException nfe) {
-            // Specific
-            this.fixInt(fName, lName);
+            
         } catch (Exception e) {
             // General
             e.printStackTrace();
