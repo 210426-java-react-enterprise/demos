@@ -66,4 +66,21 @@ public class AppUser {
     public int getAge() {
         return age;
     }
+
+    public String toFileString()
+    {
+        return String.format("%s;%s;%s;%s;%s;%d" , username, password, email, firstName, lastName, age);
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

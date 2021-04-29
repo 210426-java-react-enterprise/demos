@@ -1,9 +1,20 @@
 package com.revature.intro.screens;
 
+import com.revature.intro.daos.UserDAO;
+import com.revature.intro.models.AppUser;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class RegisterScreen {
+
+    private  BufferedReader consoleReader;
+    private UserDAO userDao = new UserDAO();
+
+    public RegisterScreen(BufferedReader bufferedReader) {
+        this.consoleReader = bufferedReader;
+    }
 
     public void render() {
         String firstName;
@@ -12,8 +23,6 @@ public class RegisterScreen {
         String username;
         String password;
         int age;
-
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
         try
         {
@@ -43,13 +52,20 @@ public class RegisterScreen {
             System.out.println("Age: ");
             // get age
             age = Integer.parseInt(consoleReader.readLine());
-        } catch (NumberFormatException e) {
-            System.err.println("Bad age value entered!");
+
+            AppUser newUser = new AppUser(username,password,email,firstName,lastName,age);
+            userDao.saveUserToFile(newUser);
+            System.out.println("New user created: " + newUser);
+
+        } catch (NumberFormatException | IOException e) {
+            System.err.println("\nBad age value entered!\n");
             e.printStackTrace();
+            this.render();
         } catch (Exception e)
         {
-            e.printStackTrace();
+            e.printStackTrace(); //we use this for development, for production we log to a file
         }
+
 
 
     }
