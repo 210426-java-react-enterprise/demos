@@ -28,3 +28,6 @@ target/
 # IDE specific files
 .idea
 *.iml
+
+# Specific files 
+users.txt
