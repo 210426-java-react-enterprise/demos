@@ -1,11 +1,11 @@
-package com.revature.intro;
+package com.revature.intro.arrays;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Driver {
+public class ArrayDriver {
 
     int[] nonStaticArray = new int[5];
     static int[] ourArray;
@@ -28,7 +28,7 @@ public class Driver {
         // you need an instance of the class
         // btw: making an instance of class within itself is not
         // a normal/common practice
-        Driver driverInstance = new Driver();
+        ArrayDriver driverInstance = new ArrayDriver();
         driverInstance.nonStaticArray = null;
 
         System.out.println(ourArray.length);
