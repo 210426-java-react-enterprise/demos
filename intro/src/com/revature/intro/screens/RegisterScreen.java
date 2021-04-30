@@ -1,7 +1,7 @@
-package com.revature.quizzard.screens;
+package com.revature.intro.screens;
 
-import com.revature.quizzard.daos.UserDAO;
-import com.revature.quizzard.models.AppUser;
+import com.revature.intro.daos.UserDAO;
+import com.revature.intro.models.AppUser;
 
 import java.io.BufferedReader;
 
@@ -24,6 +24,18 @@ public class RegisterScreen {
         String lastName;
         int age;
 
+
+        /*
+        Buffered readers are good for parsing string.
+        Scanner is better for parsing different primitive types.
+         */
+
+        //ok, but a little verbose
+        //InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+        //BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
+
+        //better
+        //BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
         try{
             //risky code that might throw an exception
