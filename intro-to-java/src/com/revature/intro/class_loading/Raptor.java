@@ -7,6 +7,9 @@ public class Raptor extends Bird {
     }
 
     Raptor() {
+        // even though I did not explicitly
+        // call super() here, it is invoked
+        // implicitly
         System.out.println("r2");
     }
 
