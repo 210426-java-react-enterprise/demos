@@ -19,8 +19,12 @@ public class Cat extends Animal {
         System.out.println("Meow.");
     }
 
-    public void setCatNumberOfLives(int newLives) {
+    protected void setCatNumberOfLives(int newLives) {
         numberOfLives = newLives;
+    }
+
+    public int getAnimalNumberOfLives() {
+        return super.numberOfLives; // the super keyword can be used to access visible members of a superclass
     }
 
 }
