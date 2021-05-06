@@ -63,11 +63,6 @@ public class OuterClass {
             public void makeSound() {
                 super.makeSound();
             }
-
-            @Override
-            public void setCatNumberOfLives(int newLives) throws RuntimeException {
-                super.setCatNumberOfLives(newLives);
-            }
         };
 
         anonSphinx.makeSound();
@@ -96,7 +91,7 @@ public class OuterClass {
         have access to both the static and non-static members of the outer
         class.
      */
-    class InnerClass {
+    private class InnerClass {
 
         int innerClassMethod() {
             privateStaticField++; // visible
