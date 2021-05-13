@@ -1,6 +1,7 @@
 package com.revature.multithreaded_java.producer_consumer;
 
 public class Producer {
+
     private final Object monitor;
     private CustomBuffer buffer;
 
@@ -22,7 +23,7 @@ public class Producer {
                 }
             }
 
-            buffer.getBufferArray()[buffer.count() -1] = 1;
+            buffer.getBufferArray()[buffer.getCount()] = 1;
             buffer.incrementCount();
 
             System.out.println("Produced new value! Notifying monitor.");

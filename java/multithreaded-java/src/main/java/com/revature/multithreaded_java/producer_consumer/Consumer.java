@@ -1,5 +1,7 @@
 package com.revature.multithreaded_java.producer_consumer;
+
 public class Consumer {
+
     private final Object monitor;
     private CustomBuffer buffer;
 
@@ -21,12 +23,12 @@ public class Consumer {
                 }
             }
 
-            buffer.getBufferArray()[buffer.count() -1] = 0;
+            buffer.getBufferArray()[buffer.getCount() - 1] = 0;
             buffer.decrementCount();
 
-            System.out.println("Consumed new value! Notifying monitor.");
+            System.out.println("Consumed value! Notifying monitor.");
             monitor.notify();
-
         }
+
     }
 }
