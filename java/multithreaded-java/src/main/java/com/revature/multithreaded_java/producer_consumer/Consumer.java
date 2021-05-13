@@ -24,7 +24,10 @@ public class Consumer {
             }
 
             buffer.getBufferArray()[buffer.getCount() - 1] = 0;
-            monitor.notify();
+            buffer.decrementCount();
+
+            System.out.println("Consumed value! Notifying monitor.");
+//            monitor.notify();
         }
 
     }
