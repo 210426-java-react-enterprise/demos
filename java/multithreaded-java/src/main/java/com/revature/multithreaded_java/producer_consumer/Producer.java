@@ -22,7 +22,7 @@ public class Producer {
                 }
             }
 
-            buffer.getBufferArray()[buffer.count()] = 1;
+            buffer.getBufferArray()[buffer.count() -1] = 1;
             buffer.incrementCount();
 
             System.out.println("Produced new value! Notifying monitor.");
