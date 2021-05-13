@@ -13,10 +13,14 @@ public class AppUser {
         this.name = name;
     }
 
-    public AppUser(String name, String state, int age, List<String> skills) {
+    public AppUser(String name, String state, int age) {
         this.name = name;
         this.state = state;
         this.age = age;
+    }
+
+    public AppUser(String name, String state, int age, List<String> skills) {
+        this(name, state, age);
         this.skills = skills;
     }
 
