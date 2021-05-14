@@ -9,6 +9,7 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class Driver {
 
@@ -21,6 +22,9 @@ public class Driver {
             System.out.println("+------------------------------------+");
 
             List<Class<?>> modelClasses = driver.getClassesInPackage("com.revature.reflective_java.loading_classes.nested_app.models");
+            for (Class<?> model : modelClasses) {
+                System.out.println(model);
+            }
 
             System.out.println("+------------------------------------+");
 
@@ -73,7 +77,7 @@ public class Driver {
 
     }
 
-    public List<Class<?>> getClassesInPackage(String packageName) {
+    public List<Class<?>> getClassesInPackage(String packageName) throws MalformedURLException, ClassNotFoundException {
 
         List<Class<?>> packageClasses = new ArrayList<>();
         List<String> classNames = new ArrayList<>();
@@ -82,13 +86,23 @@ public class Driver {
 
         for (File file : Objects.requireNonNull(packageDirectory.listFiles())) {
             if (file.isDirectory()) {
-                packageClasses.addAll(getClassesInPackage(packageName + "." + file.getName()))
+                packageClasses.addAll(getClassesInPackage(packageName + "." + file.getName()));
             } else if (file.getName().contains(".class")) {
                 classNames.add(file.getName());
             }
         }
 
+        URLClassLoader ucl = new URLClassLoader(new URL[] { new File("target/classes/").toURI().toURL() });
+
+        for (String className : classNames) {
+            packageClasses.add(ucl.loadClass(packageName + "." + className.substring(0, className.length() - 6)));
+        }
+
         return packageClasses;
+
+    }
+
+    public List<Class<?>> getClassesInPackageWithConstraints(String packageName, Predicate<Class<?>> predicate) {
 
     }
 
