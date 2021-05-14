@@ -2,11 +2,15 @@ package com.revature.reflective_java.loading_classes;
 
 import com.revature.reflective_java.loading_classes.classloaders.CustomClassLoader;
 import com.revature.reflective_java.loading_classes.nested_app.models.AppUser;
+import com.revature.reflective_java.loading_classes.nested_app.models.StudySet;
+import com.revature.reflective_java.loading_classes.nested_app.util.Column;
 import com.revature.reflective_java.loading_classes.nested_app.util.Entity;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -45,11 +49,15 @@ public class Driver {
 
             System.out.println("+------------------------------------+");
 
-            driver.guessWho("this is a string");
-            driver.guessWho(new AppUser());
-            driver.guessWho(new Object());
 
-        } catch (ClassNotFoundException | MalformedURLException e) {
+            AppUser u = new AppUser("test-username", "test-password");
+            u.setId(101);
+            driver.guessWho(u);
+
+            Class<StudySet> ssClass = StudySet.class;
+            StudySet s = driver.makeNewObject(ssClass);
+
+        } catch (ClassNotFoundException | MalformedURLException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
@@ -179,9 +187,68 @@ public class Driver {
         }
     }
 
-    private void guessWho(Object o) {
+    /**
+     * This method requires that the Object passed as an argument must be annotated with @Entity
+     * @param o
+     */
+    private void guessWho(Object o) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
         Class<?> oClass = Objects.requireNonNull(o.getClass());
-        System.out.println(oClass);
+
+        if (!oClass.isAnnotationPresent(Entity.class)) {
+            throw new RuntimeException("Cannot read values of non-Entity class!");
+        }
+
+        System.out.println("Class name: " + oClass);
+
+        Entity entityAnno = oClass.getAnnotation(Entity.class);
+        System.out.println("Value inside of @Entity: " + entityAnno.name());
+
+        Field[] oClassFields = oClass.getDeclaredFields();
+        for (Field field : oClassFields) {
+            field.setAccessible(true);
+            String simpleName = oClass.getSimpleName() + "." + field.getName();
+            System.out.println(simpleName + " contains the value: " + field.get(o));
+            System.out.println(simpleName + " is annotated with: ");
+            Annotation[] fieldAnnos = field.getAnnotations();
+            for (Annotation anno: fieldAnnos) {
+
+                System.out.println("\t- " + anno.annotationType().getSimpleName());
+
+                if(anno instanceof Column) {
+                    Column column = (Column) field.getAnnotation(anno.annotationType());
+                    System.out.println("\t\t+ It has the value: " + column.name());
+                }
+
+
+            }
+            field.setAccessible(false);
+        }
+
+        Method getIdMethod = oClass.getMethod("getId");
+        int id = (int) getIdMethod.invoke(o);
+        System.out.println(id);
+
+        Method setIdMethod = oClass.getMethod("setId", int.class);
+        setIdMethod.invoke(o, 201);
+
+        id = (int) getIdMethod.invoke(o);
+        System.out.println(id);
+
+        Constructor<?> objectConstructor = oClass.getConstructor();
+        Object obj  = objectConstructor.newInstance();
+        System.out.println(obj.getClass() == o.getClass()); // obj and o are of the same type!
+        System.out.println(o == obj); // but they are not the same instance!
+
+        AppUser dynamicUser = (AppUser) obj;
+        System.out.println(dynamicUser.getId());
+
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public <T> T makeNewObject(Class<T> clazz) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        Constructor<?> objectConstructor = clazz.getConstructor();
+        Object obj  = Objects.requireNonNull(objectConstructor.newInstance());
+        return (T) obj;
     }
 
 }

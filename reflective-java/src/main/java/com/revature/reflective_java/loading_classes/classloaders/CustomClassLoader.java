@@ -18,7 +18,7 @@ public class CustomClassLoader extends ClassLoader {
 
             String formattedStr = className.replace('.', '/') + ".class";
             InputStream in = ClassLoader.getSystemResourceAsStream(formattedStr);
-            byte[] buffer = new byte[10000];
+            byte[] buffer = new byte[100000];
             int length = Objects.requireNonNull(in).read(buffer);
             return defineClass(className, buffer, 0, length);
 

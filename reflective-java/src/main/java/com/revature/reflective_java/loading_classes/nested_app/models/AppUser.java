@@ -2,13 +2,15 @@ package com.revature.reflective_java.loading_classes.nested_app.models;
 
 import com.revature.reflective_java.loading_classes.nested_app.util.Column;
 import com.revature.reflective_java.loading_classes.nested_app.util.Entity;
+import com.revature.reflective_java.loading_classes.nested_app.util.Id;
 
 /**
  *
  */
-@Entity(name = "users")
+@Entity(name = "app_users")
 public class AppUser {
 
+    @Id
     @Column(name = "user_id")
     private int id;
 
