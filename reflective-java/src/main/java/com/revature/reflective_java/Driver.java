@@ -1,10 +1,10 @@
-package com.revature.reflective_java.loading_classes;
+package com.revature.reflective_java;
 
-import com.revature.reflective_java.loading_classes.classloaders.CustomClassLoader;
-import com.revature.reflective_java.loading_classes.nested_app.models.AppUser;
-import com.revature.reflective_java.loading_classes.nested_app.models.StudySet;
-import com.revature.reflective_java.loading_classes.nested_app.util.Column;
-import com.revature.reflective_java.loading_classes.nested_app.util.Entity;
+import com.revature.reflective_java.classloaders.CustomClassLoader;
+import com.revature.reflective_java.nested_app.models.AppUser;
+import com.revature.reflective_java.nested_app.models.StudySet;
+import com.revature.reflective_java.nested_app.util.Column;
+import com.revature.reflective_java.nested_app.util.Entity;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -74,13 +74,13 @@ public class Driver {
 
         // Accessing a class object using the current thread's classloader
         ClassLoader currentClassLoader = Thread.currentThread().getContextClassLoader();;
-        Class<?> someClass = currentClassLoader.loadClass("com.revature.reflective_java.loading_classes.Driver");
+        Class<?> someClass = currentClassLoader.loadClass("com.revature.reflective_java.Driver");
         System.out.println(someClass);
 
         // Accessing a class object using a URLClassLoader to load potentially external class files
         URL[] urls = new URL[] { new File("target/classes/").toURI().toURL() };
         URLClassLoader ucl = new URLClassLoader(urls);
-        Class<?> anotherClass = ucl.loadClass("com.revature.reflective_java.loading_classes.Driver");
+        Class<?> anotherClass = ucl.loadClass("com.revature.reflective_java.Driver");
         System.out.println(anotherClass);
 
         // Here is an example of grabbing a class file from a completely different application
@@ -96,8 +96,8 @@ public class Driver {
         System.out.println(someClass == anotherClass); // true
 
         // Unless...
-        Class<?> aClass = new CustomClassLoader().loadClass("com.revature.reflective_java.loading_classes.Driver");
-        Class<?> diffClass = new CustomClassLoader().loadClass("com.revature.reflective_java.loading_classes.Driver");
+        Class<?> aClass = new CustomClassLoader().loadClass("com.revature.reflective_java.Driver");
+        Class<?> diffClass = new CustomClassLoader().loadClass("com.revature.reflective_java.Driver");
         System.out.println(aClass == diffClass); // false
 
         // Even though Quizzard's Driver and this application's Driver have the same simple name

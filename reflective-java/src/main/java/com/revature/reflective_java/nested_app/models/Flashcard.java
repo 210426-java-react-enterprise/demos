@@ -1,8 +1,8 @@
-package com.revature.reflective_java.loading_classes.nested_app.models;
+package com.revature.reflective_java.nested_app.models;
 
 
-import com.revature.reflective_java.loading_classes.nested_app.models.enums.Category;
-import com.revature.reflective_java.loading_classes.nested_app.util.Entity;
+import com.revature.reflective_java.nested_app.models.enums.Category;
+import com.revature.reflective_java.nested_app.util.Entity;
 
 @Entity
 public class Flashcard {

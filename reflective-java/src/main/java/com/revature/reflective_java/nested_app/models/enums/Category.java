@@ -1,4 +1,4 @@
-package com.revature.reflective_java.loading_classes.nested_app.models.enums;
+package com.revature.reflective_java.nested_app.models.enums;
 
 public enum Category {
 

@@ -1,4 +1,4 @@
-package com.revature.reflective_java.loading_classes.classloaders;
+package com.revature.reflective_java.classloaders;
 
 import java.io.InputStream;
 import java.util.Objects;
