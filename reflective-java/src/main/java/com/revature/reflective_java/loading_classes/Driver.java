@@ -1,8 +1,13 @@
 package com.revature.reflective_java.loading_classes;
 
 import com.revature.reflective_java.loading_classes.classloaders.CustomClassLoader;
+import com.revature.reflective_java.loading_classes.nested_app.models.AppUser;
+import com.revature.reflective_java.loading_classes.nested_app.util.Entity;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -27,6 +32,22 @@ public class Driver {
             }
 
             System.out.println("+------------------------------------+");
+
+            String packageName = "com.revature.reflective_java.loading_classes.nested_app.models";
+            List<Class<?>> entityClasses = driver.getClassesInPackageWithConstraints(packageName,
+                                                    clazz -> clazz.isAnnotationPresent(Entity.class));
+            for (Class<?> entity : entityClasses) {
+                driver.exploreClassMembers(entity);
+                System.out.println();
+            }
+
+            driver.exploreClassMembers(driver.getClass());
+
+            System.out.println("+------------------------------------+");
+
+            driver.guessWho("this is a string");
+            driver.guessWho(new AppUser());
+            driver.guessWho(new Object());
 
         } catch (ClassNotFoundException | MalformedURLException e) {
             e.printStackTrace();
@@ -102,8 +123,65 @@ public class Driver {
 
     }
 
-    public List<Class<?>> getClassesInPackageWithConstraints(String packageName, Predicate<Class<?>> predicate) {
+    public List<Class<?>> getClassesInPackageWithConstraints(String packageName, Predicate<Class<?>> predicate) throws MalformedURLException, ClassNotFoundException {
 
+        List<Class<?>> packageClasses = new ArrayList<>();
+        List<String> classNames = new ArrayList<>();
+
+        File packageDirectory = new File("target/classes/" + packageName.replace('.', '/'));
+
+        for (File file : Objects.requireNonNull(packageDirectory.listFiles())) {
+            if (file.isDirectory()) {
+                packageClasses.addAll(getClassesInPackageWithConstraints(packageName + "." + file.getName(), predicate));
+            } else if (file.getName().contains(".class")) {
+                classNames.add(file.getName());
+            }
+        }
+
+        URLClassLoader ucl = new URLClassLoader(new URL[] { new File("target/classes/").toURI().toURL() });
+
+        for (String className : classNames) {
+            Class<?> clazz = ucl.loadClass(packageName + "." + className.substring(0, className.length() - 6));
+            if (predicate.test(clazz)) {
+                packageClasses.add(clazz);
+            }
+         }
+
+        return packageClasses;
+    }
+
+    public void exploreClassMembers(Class<?> clazz) {
+        System.out.println("Class name: " + clazz);
+
+        Annotation[] classAnnotations = clazz.getAnnotations();
+        printMembers(classAnnotations, "Annotations");
+
+        Field[] declaredClassFields = clazz.getDeclaredFields();
+        printMembers(declaredClassFields, "Declared Fields");
+
+        Method[] declaredClassMethods = clazz.getDeclaredMethods();
+        printMembers(declaredClassMethods, "Declared Methods");
+
+        Field[] classFields = clazz.getFields();
+        printMembers(classFields, "All Fields");
+
+        Method[] classMethods = clazz.getMethods();
+        printMembers(classMethods, "All Methods");
+
+    }
+
+    private void printMembers(Object[] members, String memberType) {
+        if (members.length != 0) {
+            System.out.println("\t" + memberType + " on class: ");
+            for (Object o : members) {
+                System.out.println("\t\t- " + o);
+            }
+        }
+    }
+
+    private void guessWho(Object o) {
+        Class<?> oClass = Objects.requireNonNull(o.getClass());
+        System.out.println(oClass);
     }
 
 }
