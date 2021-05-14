@@ -27,7 +27,7 @@ public class Consumer {
             buffer.decrementCount();
 
             System.out.println("Consumed value! Notifying monitor.");
-//            monitor.notify();
+            monitor.notify();
         }
 
     }
