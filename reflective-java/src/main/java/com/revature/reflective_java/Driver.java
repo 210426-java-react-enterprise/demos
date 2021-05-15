@@ -30,14 +30,14 @@ public class Driver {
 
             System.out.println("+------------------------------------+");
 
-            List<Class<?>> modelClasses = driver.getClassesInPackage("com.revature.reflective_java.loading_classes.nested_app.models");
+            List<Class<?>> modelClasses = driver.getClassesInPackage("com.revature.reflective_java.nested_app.models");
             for (Class<?> model : modelClasses) {
                 System.out.println(model);
             }
 
             System.out.println("+------------------------------------+");
 
-            String packageName = "com.revature.reflective_java.loading_classes.nested_app.models";
+            String packageName = "com.revature.reflective_java.nested_app.models";
             List<Class<?>> entityClasses = driver.getClassesInPackageWithConstraints(packageName,
                                                     clazz -> clazz.isAnnotationPresent(Entity.class));
             for (Class<?> entity : entityClasses) {
@@ -111,6 +111,8 @@ public class Driver {
         List<Class<?>> packageClasses = new ArrayList<>();
         List<String> classNames = new ArrayList<>();
 
+        String s = "target/classes/" + packageName.replace('.', '/');
+        System.out.println(s);
         File packageDirectory = new File("target/classes/" + packageName.replace('.', '/'));
 
         for (File file : Objects.requireNonNull(packageDirectory.listFiles())) {
@@ -192,6 +194,8 @@ public class Driver {
      * @param o
      */
     private void guessWho(Object o) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
+
+        System.out.println("Thread.currentThread().getContectClassLoader(): " + Thread.currentThread().getContextClassLoader());
         Class<?> oClass = Objects.requireNonNull(o.getClass());
 
         if (!oClass.isAnnotationPresent(Entity.class)) {
