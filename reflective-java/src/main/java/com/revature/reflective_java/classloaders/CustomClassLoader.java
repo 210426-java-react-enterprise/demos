@@ -15,13 +15,11 @@ public class CustomClassLoader extends ClassLoader {
         System.out.printf("Loading %s into memory\n", className);
 
         try {
-
             String formattedStr = className.replace('.', '/') + ".class";
             InputStream in = ClassLoader.getSystemResourceAsStream(formattedStr);
             byte[] buffer = new byte[100000];
             int length = Objects.requireNonNull(in).read(buffer);
             return defineClass(className, buffer, 0, length);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
