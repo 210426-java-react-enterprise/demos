@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component
+@Component // this indicates that this class should be used as
 public class FootballCoach implements Coach {
 
     @Value("${coach-email}")
