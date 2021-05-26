@@ -2,7 +2,6 @@ package com.revature.spring_aop;
 
 import com.revature.spring_aop.config.AppConfig;
 import com.revature.spring_aop.models.FootballCoach;
-import com.revature.spring_aop.models.UnmanagedBean;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AppDriver {
@@ -18,8 +17,11 @@ public class AppDriver {
             System.out.println(footballCoach.getTeamName());
             footballCoach.setEmail("someotheremail@gmail.com");
 
-            UnmanagedBean unmanagedBean = new UnmanagedBean();
-            unmanagedBean.test();
+            try {
+                footballCoach.setTeamName("The Java Beans");
+            } catch (Exception e) {
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

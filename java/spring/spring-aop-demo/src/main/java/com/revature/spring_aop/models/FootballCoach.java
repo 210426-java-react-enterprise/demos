@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component // this indicates that this class should be used as
+@Component
 public class FootballCoach implements Coach {
 
     @Value("${coach-email}")
@@ -36,7 +36,7 @@ public class FootballCoach implements Coach {
     }
 
     public void setTeamName(String teamName) {
-        this.teamName = teamName;
+        throw new RuntimeException("Team name cannot be changed!");
     }
 
     @Autowired // this is required because we are using setter-based injection
