@@ -48,7 +48,6 @@ public class TestController {
         resp.setStatus(204); // No content response status
     }
 
-
     @GetMapping("/test8")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void test8() {
