@@ -1,7 +1,7 @@
 package com.revature.spring_boot.controllers;
 
 import com.revature.spring_boot.dtos.Credentials;
-import com.revature.spring_boot.UserRepository;
+import com.revature.spring_boot.repos.UserRepository;
 import com.revature.spring_boot.models.AppUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.revature.spring_boot;
+package com.revature.spring_boot.repos;
 
 import com.revature.spring_boot.models.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
