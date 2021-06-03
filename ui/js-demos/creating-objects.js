@@ -60,6 +60,7 @@ counter.privateNum = 10;
 console.log(counter.getNum()); // 0
 console.log(counter);
 
+// Objects can be made using a function that acts as a constructor
 function CounterCreator(startingValue) {
     this.value = startingValue;
     this.increment = function() {
@@ -110,7 +111,7 @@ console.log(myCar);
 myCar.changeColor('red');
 console.log(myCar);
 
-// ES6 class syntax (sugar syntax)
+// ES6 class syntax (sugar syntax); works the exact same as function constructors under the hood
 class Vehicle {
     beep = function() {
         console.log("BEEP!");
