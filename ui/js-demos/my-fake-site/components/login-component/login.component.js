@@ -31,7 +31,7 @@ function login() {
 
                 let authenticatedUser = JSON.parse(xhr.responseText);
                 loggedInUser = authenticatedUser;
-                renderDashboard();
+                render('dashboard');
 
             } else if (xhr.status != 200) {
                 printErrorToPage('Invalid credentials provided!');

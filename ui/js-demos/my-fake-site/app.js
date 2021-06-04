@@ -3,18 +3,10 @@ const DYNAMIC_JS = document.getElementById('dynamic-js');
 const DYNAMIC_CSS = document.getElementById('dynamic-css');
 
 window.onload = () => {
-    renderLogin();
+    render('login');
 }
 
-function renderLogin() {
-    loadViewTemplate('login');
-}
-
-function renderDashboard() {
-    loadViewTemplate('dashboard');
-}
-
-function loadViewTemplate(viewName) {
+function render(viewName) {
     let xhr = new XMLHttpRequest();
     let path = `components/${viewName}-component/${viewName}.component`;
     xhr.open('GET', `${path}.html`);
