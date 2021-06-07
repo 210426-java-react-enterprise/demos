@@ -1,0 +1,17 @@
+{
+  "name": "intro",
+  "version": "1.0.0",
+  "description": "a basic introduction to nodejs and react",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "intro"
+  ],
+  "author": "Wezley Singleton",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.3.2"
+  }
+}
