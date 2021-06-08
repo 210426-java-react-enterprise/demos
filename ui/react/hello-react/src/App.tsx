@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import { LoginComponent } from './components/LoginComponent';
+import { LoginComponent_Class } from './components/LoginComponent_Class';
+import { User } from './models/user';
+import HomeComponent from './components/HomeComponent';
 
 function App() {
+
+  // @ts-ignore
+  const [authUser, setAuthUser] = useState(null as User);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+          <Switch>
+            <Route path="/home" render={() => <HomeComponent username={authUser?.username}/>} />
+            <Route path="/" render={() => <LoginComponent authUser={authUser} setAuthUser={setAuthUser} />} />
+          </Switch>
+      </Router>
+    </>
   );
 }
 
