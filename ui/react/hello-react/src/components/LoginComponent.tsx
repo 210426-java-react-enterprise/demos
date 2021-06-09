@@ -1,4 +1,4 @@
-import { Button, FormControl, Input, InputLabel, Typography } from "@material-ui/core";
+import { Button, FormControl, Input, InputLabel, makeStyles, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { authenticate } from "../remote/auth-service";
@@ -8,7 +8,19 @@ interface ILoginProps {
     setAuthUser: (user: any) => void
 }
 
+const useStyles = makeStyles({
+    loginContainer: {
+        justifyContent: "center",
+        marginLeft: "25rem",
+        marginTop: "10rem",
+        padding: 20,
+        width: "25%"
+    }
+});
+
 export function LoginComponent(props: ILoginProps) {
+
+    const classes = useStyles();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -32,33 +44,35 @@ export function LoginComponent(props: ILoginProps) {
         <Redirect to="/home"/>
         :
         <>
-            <Typography align="center" variant="h4">Log In To Your Quizzard Account!</Typography>
+            <div className={classes.loginContainer}>
+                <Typography align="center" variant="h4">Log In To Your Quizzard Account!</Typography>
 
-            <FormControl margin="normal" fullWidth>
-                <InputLabel htmlFor="username">Username</InputLabel>
-                <Input 
-                    onChange={updateUsername}
-                    id="username"
-                    type="text"
-                    placeholder="Enter your username"
-                />
-            </FormControl>
+                <FormControl margin="normal" fullWidth>
+                    <InputLabel htmlFor="username">Username</InputLabel>
+                    <Input 
+                        onChange={updateUsername}
+                        id="username"
+                        type="text"
+                        placeholder="Enter your username"
+                    />
+                </FormControl>
 
-            <FormControl margin="normal" fullWidth>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input 
-                    onChange={updatePassword}
-                    id="password"
-                    type="password"
-                    placeholder="Enter your password"
-                />
-            </FormControl>
-            <br/><br/>
-            <Button 
-                onClick={login}
-                variant="contained" 
-                color="primary" 
-                size="medium">Login</Button>
+                <FormControl margin="normal" fullWidth>
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <Input 
+                        onChange={updatePassword}
+                        id="password"
+                        type="password"
+                        placeholder="Enter your password"
+                    />
+                </FormControl>
+                <br/><br/>
+                <Button 
+                    onClick={login}
+                    variant="contained" 
+                    color="primary" 
+                    size="medium">Login</Button>
+            </div>
         </>
     );
 }
