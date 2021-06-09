@@ -1,11 +1,12 @@
 import { Button, FormControl, Input, InputLabel, makeStyles, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
+import { User } from "../models/user";
 import { authenticate } from "../remote/auth-service";
 
 interface ILoginProps {
-    authUser: any,
-    setAuthUser: (user: any) => void
+    authUser: User | undefined,
+    setAuthUser: (user: User | undefined) => void
 }
 
 const useStyles = makeStyles({

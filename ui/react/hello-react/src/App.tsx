@@ -6,11 +6,12 @@ import { LoginComponent } from './components/LoginComponent';
 import { LoginComponent_Class } from './components/LoginComponent_Class';
 import { User } from './models/user';
 import HomeComponent from './components/HomeComponent';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import NavbarComponent from './components/NavbarComponent';
 
 function App() {
 
-  // @ts-ignore
-  const [authUser, setAuthUser] = useState(null as User);
+  const [authUser, setAuthUser] = useState(undefined as User | undefined);
 
   const mockFlashcards = [
     {
@@ -33,10 +34,14 @@ function App() {
   return (
     <>
       <Router>
+
+          <NavbarComponent currentUser={authUser} setCurrentUser={setAuthUser}/>
+
           <Switch>
-            <Route path="/home" render={() => <HomeComponent username={authUser?.username} flashcards={mockFlashcards}/>} />
+            <Route path="/home" render={() => <HomeComponent currentUser={authUser} flashcards={mockFlashcards}/>} />
             <Route path="/" render={() => <LoginComponent authUser={authUser} setAuthUser={setAuthUser} />} />
           </Switch>
+          
       </Router>
     </>
   );
