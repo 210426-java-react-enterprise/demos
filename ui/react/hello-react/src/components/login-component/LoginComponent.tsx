@@ -1,12 +1,13 @@
+import { Alert } from '@material-ui/lab';
 import { Button, FormControl, Input, InputLabel, makeStyles, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { User } from "../models/user";
-import { authenticate } from "../remote/auth-service";
+import { User } from "../../models/user";
 
 interface ILoginProps {
     authUser: User | undefined,
-    setAuthUser: (user: User | undefined) => void
+    errorMessage: string,
+    loginAction: (username: string, password: string) => void
 }
 
 const useStyles = makeStyles({
@@ -19,13 +20,13 @@ const useStyles = makeStyles({
     }
 });
 
-export function LoginComponent(props: ILoginProps) {
+function LoginComponent(props: ILoginProps) {
 
     const classes = useStyles();
 
+    // internal component state, need not be stored in global state
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
 
     let updateUsername = (e: any) => {
         setUsername(e.currentTarget.value);
@@ -36,15 +37,17 @@ export function LoginComponent(props: ILoginProps) {
     }
 
     let login = async () => {
-        let authUser = await authenticate(username, password);
-        props.setAuthUser(authUser);
+        console.log('login invoked!')
+        props.loginAction(username, password);
     }
 
     return (
+        
         props.authUser ?
         <Redirect to="/home"/>
         :
         <>
+            {console.log('LoginComponent rerendering!')}
             <div className={classes.loginContainer}>
                 <Typography align="center" variant="h4">Log In To Your Quizzard Account!</Typography>
 
@@ -73,7 +76,17 @@ export function LoginComponent(props: ILoginProps) {
                     variant="contained" 
                     color="primary" 
                     size="medium">Login</Button>
+                <br/><br/>
+                {
+                    props.errorMessage
+                    ?
+                    <Alert severity="error">{props.errorMessage}</Alert>
+                    :
+                    <></>
+                }
             </div>
         </>
     );
 }
+
+export default LoginComponent;

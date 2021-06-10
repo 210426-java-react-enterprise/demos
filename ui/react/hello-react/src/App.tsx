@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
-import { LoginComponent } from './components/LoginComponent';
-import { LoginComponent_Class } from './components/LoginComponent_Class';
-import { User } from './models/user';
-import HomeComponent from './components/HomeComponent';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import NavbarComponent from './components/NavbarComponent';
+import LoginComponent from './components/login-component/LoginContainer';
+import HomeComponent from './components/home-component/HomeContainer';
+import NavbarComponent from './components/navbar-component/NavbarComponent';
+import { store } from './Store';
+import { Provider } from 'react-redux';
 
 function App() {
-
-  const [authUser, setAuthUser] = useState(undefined as User | undefined);
 
   const mockFlashcards = [
     {
@@ -33,16 +28,18 @@ function App() {
 
   return (
     <>
-      <Router>
+      <Provider store={store}>
+        <Router>
 
-          <NavbarComponent currentUser={authUser} setCurrentUser={setAuthUser}/>
+            <NavbarComponent currentUser={undefined} />
 
-          <Switch>
-            <Route path="/home" render={() => <HomeComponent currentUser={authUser} flashcards={mockFlashcards}/>} />
-            <Route path="/" render={() => <LoginComponent authUser={authUser} setAuthUser={setAuthUser} />} />
-          </Switch>
-          
-      </Router>
+            <Switch>
+              <Route path="/home" render={() => <HomeComponent />} />
+              <Route path="/" render={() => <LoginComponent />} />
+            </Switch>
+
+        </Router>
+      </Provider>
     </>
   );
 }

@@ -1,10 +1,10 @@
 import { AppBar, List, ListItem, ListItemText, makeStyles, Toolbar, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { User } from "../models/user";
+import { User } from "../../models/user";
 
 interface INavbarProps {
     currentUser: User | undefined,
-    setCurrentUser: (nextCurrentUser: User | undefined) => void
+    // setCurrentUser: (nextCurrentUser: User | undefined) => void
 }
 
 const useStyles = makeStyles({
@@ -19,7 +19,7 @@ function NavbarComponent(props: INavbarProps) {
     const classes = useStyles();
 
     function logout() {
-        props.setCurrentUser(undefined);
+        // props.setCurrentUser(undefined);
     }
 
     return (

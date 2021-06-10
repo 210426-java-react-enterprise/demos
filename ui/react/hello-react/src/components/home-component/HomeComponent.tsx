@@ -1,24 +1,24 @@
 import { Card, CardContent, Typography } from "@material-ui/core";
 import { Redirect } from "react-router";
-import { User } from "../models/user";
+import { User } from "../../models/user";
+
 
 interface IHomeProps {
-    currentUser: User | undefined,
-    flashcards: any[]
+    authUser: User | undefined
 }
 
 const HomeComponent = (props: IHomeProps) => {
 
     return (
-        !props.currentUser ?
+        !props.authUser ?
         
         <Redirect to="/login"/> 
         
         :
 
         <>
-            <h1>Welcome, {props.currentUser.username}!</h1>
-            {props.flashcards.map(flashcard => {
+            <h1>Welcome, {props.authUser.username}!</h1>
+            {/* {props.flashcards.map(flashcard => {
                 return (
                 <Card key={flashcard.id}>
                     <CardContent>
@@ -31,7 +31,7 @@ const HomeComponent = (props: IHomeProps) => {
                     </CardContent>
                 </Card>
                 );
-            })}
+            })} */}
         </>
     );
 }
