@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import { authenticate } from "../remote/auth-service";
 
 export const loginActionTypes = {
+    NO_CREDENTIALS_PROVIDED: 'QUIZZARD_NO_CREDENTIALS_PROVIDED',
     SUCCESSFUL_LOGIN: 'QUIZZARD_SUCCESSFUL_LOGIN',
     BAD_REQUEST: 'QUIZZARD_BAD_REQUEST',
     INVALID_CREDENTIALS: 'QUIZZARD_INVALID_CREDENTIALS',
@@ -10,6 +11,14 @@ export const loginActionTypes = {
 
 export const loginAction = (username: string, password: string) =>  async (dispatch: Dispatch) => {
     
+    if (!username || !password) {
+        dispatch({
+            type: loginActionTypes.NO_CREDENTIALS_PROVIDED,
+            payload: 'You must provide a username and a password!'
+        })
+        return;
+    }
+
     try {
         console.log(`Attempting to login using credentials ${username} ${password}...`);
         let authUser = await authenticate(username, password);

@@ -118,3 +118,27 @@ test('Renders the LoginComponent with initialState', () => {
     expect(wrapper.find('#error-message').at(0).exists()).toBe(true);
 
 });
+
+test('When login button is click and no username/password is provided, proper error message should display', () => {
+
+    const configureMockStore = configureStore();
+
+    let initialState = {
+        login: {
+            authUser: undefined,
+            errorMessage: ''
+        }
+    }
+
+    const mockStore = configureMockStore(initialState);
+
+    const wrapper = createMount()(
+        <Provider store={mockStore}>
+            <LoginComponent />
+        </Provider>
+    );
+
+    // Simulate a click event on the login button (with no username or password being set)
+    // Check to see that the error message does render with the appropriate message
+
+})
