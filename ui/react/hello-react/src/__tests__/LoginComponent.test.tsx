@@ -1,5 +1,5 @@
 import { queryByAttribute } from "@testing-library/react";
-import Enzyme from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import { createMount } from '@material-ui/core/test-utils';
 import configureStore from 'redux-mock-store';
@@ -123,6 +123,8 @@ test('When login button is click and no username/password is provided, proper er
 
     const configureMockStore = configureStore();
 
+    const mockCallBack = jest.fn();
+    
     let initialState = {
         login: {
             authUser: undefined,
@@ -138,7 +140,12 @@ test('When login button is click and no username/password is provided, proper er
         </Provider>
     );
 
+    const button= shallow(<Button onClick={mockCallBack}>Login</Button>)
+
     // Simulate a click event on the login button (with no username or password being set)
     // Check to see that the error message does render with the appropriate message
+    
+    button.find('login-button').simulate('click');
+    expect(mockCallBack.mock.calls.length).toEqual(1);
 
 })
