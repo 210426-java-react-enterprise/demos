@@ -48,7 +48,7 @@ function LoginComponent(props: ILoginProps) {
         :
         <>
             {console.log('LoginComponent rerendering!')}
-            <div className={classes.loginContainer}>
+            <div id="login-component" className={classes.loginContainer}>
                 <Typography align="center" variant="h4">Log In To Your Quizzard Account!</Typography>
 
                 <FormControl margin="normal" fullWidth>
@@ -72,6 +72,7 @@ function LoginComponent(props: ILoginProps) {
                 </FormControl>
                 <br/><br/>
                 <Button 
+                    id="login-button"
                     onClick={login}
                     variant="contained" 
                     color="primary" 
@@ -80,7 +81,7 @@ function LoginComponent(props: ILoginProps) {
                 {
                     props.errorMessage
                     ?
-                    <Alert severity="error">{props.errorMessage}</Alert>
+                    <Alert id="error-message" severity="error">{props.errorMessage}</Alert>
                     :
                     <></>
                 }
