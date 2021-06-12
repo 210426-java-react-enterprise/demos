@@ -24,6 +24,8 @@ hs_err_pid*
 
 # Build folders
 target/
+
 #Idea folders
 .idea/
 *.iml
+
