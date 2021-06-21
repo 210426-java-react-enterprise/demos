@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState  } from "../../app/store";
 
+// Declare a State interface which sets the types needed inside of initial state object
 interface State {
     count: number;
     isLoading: boolean;
@@ -8,6 +9,8 @@ interface State {
     data: object;
 }
 
+// Declare the initialState, this is what the state will be when the application loads 
+//before dispatching actions which use reducers defined below to maniupulate the application state
 const initialState: State = {
     count: 0,
     isLoading: false,
@@ -15,6 +18,12 @@ const initialState: State = {
     data: {}
 };
 
+/* Define the state slice, using createSlice hook
+    - this takes in a name, initialState (defined above), and then you define the reducers
+    - the reducers in this example are both the REDUCER AND THE ACTION COMBINED
+    - within the reducer, define how the state will be manipulated
+    - if there is a payload that needs to be store in state, include that (state, action: PayloadAction<type>) in the reducer definition
+*/
 export const counterSlice = createSlice({
     name: "counter",
     initialState,
@@ -44,8 +53,11 @@ export const counterSlice = createSlice({
     }
 });
 
+// Export the reducers (which are both reducer definitions AND ACTIONS) here to be imported into your components when needed
 export const { increment, decrement, isLoading, isLoaded, resetCount, addWord, loadData } = counterSlice.actions;
 
+// Export the entire state object, this is what you will pass into useSelector(here) when you bring the state into any component you may need it in
 export const countState = (state: RootState) => state.counter;
 
+// Export entire slice, to be included in the main store here
 export default counterSlice.reducer;
