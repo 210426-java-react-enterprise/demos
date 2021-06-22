@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>Persistence</ID>
+  <OriginalElement>JavaeeElement:/15298c39/entityManagerFactory/lombok_demo/jpa/JPA/PersistenceModel</OriginalElement>
+  <nodes>
+    <node x="46.0" y="0.0">House#file://C:/Users/rtclo/Documents/Revature/Code/210426-java-react-enterprise/lombok_demo/src/main/java/com/revature/models/House.java</node>
+    <node x="46.0" y="81.0">Pet#file://C:/Users/rtclo/Documents/Revature/Code/210426-java-react-enterprise/lombok_demo/src/main/java/com/revature/models/Pet.java</node>
+    <node x="174.0" y="0.0">AbstractPersistable#jar://C:/Users/rtclo/.m2/repository/org/springframework/data/spring-data-jpa/2.4.5/spring-data-jpa-2.4.5.jar!/org/springframework/data/jpa/domain/AbstractPersistable.class</node>
+    <node x="173.0" y="106.0">AbstractAuditable#jar://C:/Users/rtclo/.m2/repository/org/springframework/data/spring-data-jpa/2.4.5/spring-data-jpa-2.4.5.jar!/org/springframework/data/jpa/domain/AbstractAuditable.class</node>
+    <node x="0.0" y="162.0">User#file://C:/Users/rtclo/Documents/Revature/Code/210426-java-react-enterprise/lombok_demo/src/main/java/com/revature/models/User.java</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Pet#file://C:/Users/rtclo/Documents/Revature/Code/210426-java-react-enterprise/lombok_demo/src/main/java/com/revature/models/Pet.java" target="House#file://C:/Users/rtclo/Documents/Revature/Code/210426-java-react-enterprise/lombok_demo/src/main/java/com/revature/models/House.java" relationship="RELATION">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="User#file://C:/Users/rtclo/Documents/Revature/Code/210426-java-react-enterprise/lombok_demo/src/main/java/com/revature/models/User.java" target="Pet#file://C:/Users/rtclo/Documents/Revature/Code/210426-java-react-enterprise/lombok_demo/src/main/java/com/revature/models/Pet.java" relationship="RELATION">
+      <point x="0.0" y="-61.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="AbstractAuditable#jar://C:/Users/rtclo/.m2/repository/org/springframework/data/spring-data-jpa/2.4.5/spring-data-jpa-2.4.5.jar!/org/springframework/data/jpa/domain/AbstractAuditable.class" target="AbstractPersistable#jar://C:/Users/rtclo/.m2/repository/org/springframework/data/spring-data-jpa/2.4.5/spring-data-jpa-2.4.5.jar!/org/springframework/data/jpa/domain/AbstractPersistable.class" relationship="INHERITANCE">
+      <point x="0.0" y="-39.0" />
+      <point x="0.0" y="28.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="168.5" y="92.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Embeddables</Category>
+    <Category>Properties</Category>
+    <Category>Superclasses</Category>
+  </Categories>
+</Diagram>
+
